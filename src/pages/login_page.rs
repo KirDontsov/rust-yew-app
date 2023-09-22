@@ -153,31 +153,31 @@ pub fn login_page() -> Html {
 		<div class="flex min-h-full flex-col justify-center items-center px-6 py-12 lg:px-8">
 
 		<h1 class="text-2xl text-center font-[300] text-indigo-400 mb-4">
-		  {"Sign in to your account"}
+		  {"Войдите в свой аккаунт"}
 		</h1>
 		<h2 class="text-lg text-center mb-4 text-ct-dark-200">
-		  {"Login to have access"}
+		  {"Введите email и пароль"}
 		</h2>
 		  <form
 			onsubmit={on_submit}
-			class="w-[384px] mx-auto overflow-hidden p-8 space-y-2 text-sm flex flex-col gap-2"
+			class="w-[480px] mx-auto overflow-hidden p-8 space-y-2 text-sm flex flex-col gap-2"
 		  >
 			<FormInput label="Email" name="email" input_type="email" input_ref={email_input_ref} handle_onchange={handle_email_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
-			<FormInput label="Password" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()}/>
+			<FormInput label="Пароль" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()}/>
 
 			<div class="text-right text-indigo-400 hover:text-indigo-500">
 			  <a href="#">
-				{"Forgot Password?"}
+				{"Забыли пароль?"}
 			  </a>
 			</div>
 			<LoadingButton
 			  loading={store.page_loading}
 			>
-			  {"Login"}
+			  {"Войти"}
 			</LoadingButton>
 			<span class="block text-white">
-			  {"Not a member?"} {" "}
-			  <Link<Route> to={Route::RegisterPage} classes="text-indigo-400 hover:text-indigo-500">{ "Start your 14 day free trial" }</Link<Route>>
+			  {"Еще не зарегестррированы?"} {" "}
+			  <Link<Route> to={Route::RegisterPage} classes="text-indigo-400 hover:text-indigo-500">{ "Начните 14-дневную бесплатную пробную версию" }</Link<Route>>
 			</span>
 		  </form>
 	  </div>

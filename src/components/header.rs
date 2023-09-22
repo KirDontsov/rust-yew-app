@@ -13,6 +13,7 @@ pub fn header_component() -> Html {
 	let (store, dispatch) = use_store::<Store>();
 	let user = store.auth_user.clone();
 	let navigator = use_navigator().unwrap();
+	let location = use_location().unwrap();
 
 	let handle_logout = {
 		let store_dispatch = dispatch.clone();
@@ -28,7 +29,7 @@ pub fn header_component() -> Html {
 					Ok(_) => {
 						set_page_loading(false, dispatch.clone());
 						set_auth_user(None, dispatch.clone());
-						set_show_alert("Logged out successfully".to_string(), dispatch);
+						set_show_alert("Вы успешно вышли из системы".to_string(), dispatch);
 						navigator.push(&router::Route::LoginPage);
 					}
 					Err(e) => {
@@ -48,30 +49,30 @@ pub fn header_component() -> Html {
 		  </div>
 		  <ul class="flex items-center gap-4">
 			<li>
-			  <Link<Route> to={Route::HomePage} classes="text-white">{"Home"}</Link<Route>>
+			  <Link<Route> to={Route::HomePage} classes={if location.path() == "/" { "text-indigo-400" } else {"text-white"}}>{"Главная"}</Link<Route>>
 			</li>
 			if user.is_some() {
 			   <>
 				<li>
-				  <Link<Route> to={Route::ProfilePage} classes="text-white">{"Profile"}</Link<Route>>
+				  <Link<Route> to={Route::ProfilePage} classes={if location.path() == "/profile" { "text-indigo-400" } else {"text-white"}}>{"Аккаунт"}</Link<Route>>
 				</li>
 				<li
 				  class="cursor-pointer text-white"
 				>
-				  {"Create Post"}
+				  {"Добавить новость"}
 				</li>
 				<li class="cursor-pointer text-white" onclick={handle_logout}>
-				  {"Logout"}
+				  {"Выйти"}
 				</li>
 			  </>
 
 			} else {
 			  <>
 				<li>
-				  <Link<Route> to={Route::RegisterPage} classes="text-white">{"SignUp"}</Link<Route>>
+				  <Link<Route> to={Route::RegisterPage} classes="text-white">{"Зарегестрироваться"}</Link<Route>>
 				</li>
 				<li>
-				  <Link<Route> to={Route::LoginPage} classes="text-white">{"Login"}</Link<Route>>
+				  <Link<Route> to={Route::LoginPage} classes="text-white">{"Войти"}</Link<Route>>
 				</li>
 			  </>
 			}

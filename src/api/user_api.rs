@@ -9,7 +9,7 @@ pub async fn api_register_user(user_data: &str) -> Result<User, String> {
 		.await
 	{
 		Ok(res) => res,
-		Err(_) => return Err("Failed to make request".to_string()),
+		Err(_) => return Err("Не удалось сделать запрос".to_string()),
 	};
 
 	if response.status() != 200 {
@@ -17,14 +17,14 @@ pub async fn api_register_user(user_data: &str) -> Result<User, String> {
 		return if let Ok(error_response) = error_response {
 			Err(error_response.message)
 		} else {
-			Err(format!("API error: {}", response.status()))
+			Err(format!("Ошибка API: {}", response.status()))
 		};
 	}
 
 	let res_json = response.json::<UserResponse>().await;
 	match res_json {
 		Ok(data) => Ok(data.data.user),
-		Err(_) => Err("Failed to parse response".to_string()),
+		Err(_) => Err("Не удалось прочитать ответ".to_string()),
 	}
 }
 
@@ -37,7 +37,7 @@ pub async fn api_login_user(credentials: &str) -> Result<UserLoginResponse, Stri
 		.await
 	{
 		Ok(res) => res,
-		Err(_) => return Err("Failed to make request".to_string()),
+		Err(_) => return Err("Не удалось сделать запрос".to_string()),
 	};
 
 	if response.status() != 200 {
@@ -45,14 +45,14 @@ pub async fn api_login_user(credentials: &str) -> Result<UserLoginResponse, Stri
 		return if let Ok(error_response) = error_response {
 			Err(error_response.message)
 		} else {
-			Err(format!("API error: {}", response.status()))
+			Err(format!("Ошибка API: {}", response.status()))
 		};
 	}
 
 	let res_json = response.json::<UserLoginResponse>().await;
 	match res_json {
 		Ok(data) => Ok(data),
-		Err(_) => Err("Failed to parse response".to_string()),
+		Err(_) => Err("Не удалось прочитать ответ".to_string()),
 	}
 }
 
@@ -63,7 +63,7 @@ pub async fn api_user_info() -> Result<User, String> {
 		.await
 	{
 		Ok(res) => res,
-		Err(_) => return Err("Failed to make request".to_string()),
+		Err(_) => return Err("Не удалось сделать запрос".to_string()),
 	};
 
 	if response.status() != 200 {
@@ -71,14 +71,14 @@ pub async fn api_user_info() -> Result<User, String> {
 		return if let Ok(error_response) = error_response {
 			Err(error_response.message)
 		} else {
-			Err(format!("API error: {}", response.status()))
+			Err(format!("Ошибка API: {}", response.status()))
 		};
 	}
 
 	let res_json = response.json::<UserResponse>().await;
 	match res_json {
 		Ok(data) => Ok(data.data.user),
-		Err(_) => Err("Failed to parse response".to_string()),
+		Err(_) => Err("Не удалось прочитать ответ".to_string()),
 	}
 }
 
@@ -89,7 +89,7 @@ pub async fn api_logout_user() -> Result<(), String> {
 		.await
 	{
 		Ok(res) => res,
-		Err(_) => return Err("Failed to make request".to_string()),
+		Err(_) => return Err("Не удалось сделать запрос".to_string()),
 	};
 
 	if response.status() != 200 {
@@ -97,7 +97,7 @@ pub async fn api_logout_user() -> Result<(), String> {
 		return if let Ok(error_response) = error_response {
 			Err(error_response.message)
 		} else {
-			Err(format!("API error: {}", response.status()))
+			Err(format!("Ошибка API: {}", response.status()))
 		};
 	}
 

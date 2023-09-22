@@ -181,17 +181,17 @@ pub fn register_page() -> Html {
 		  {"Paradox Agency"}
 		</h1>
 		<h2 class="text-lg text-center mb-4 text-ct-dark-200">
-		  {"Sign Up To Get Started!"}
+		  {"Зарегистрируйтесь, чтобы начать!"}
 		</h2>
 		  <form
 			onsubmit={on_submit}
-			class="w-[384px] mx-auto overflow-hidden p-8 space-y-2 text-sm flex flex-col gap-2"
+			class="w-[480px] mx-auto overflow-hidden p-8 space-y-2 text-sm flex flex-col gap-2"
 		  >
-			<FormInput label="Full Name" name="name" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+			<FormInput label="Имя" name="name" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
 			<FormInput label="Email" name="email" input_type="email" input_ref={email_input_ref} handle_onchange={handle_email_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
-			<FormInput label="Password" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+			<FormInput label="Пароль" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
 			<FormInput
-			  label="Confirm Password"
+			  label="Подтвердите пароль"
 			  name="password_confirm"
 			  input_type="password"
 			  input_ref={password_confirm_input_ref}
@@ -200,13 +200,13 @@ pub fn register_page() -> Html {
 			  handle_on_input_blur={validate_input_on_blur.clone()}
 			/>
 			<span class="block text-white">
-			  {"Already have an account?"} {" "}
-			<Link<Route> to={Route::LoginPage} classes="text-indigo-400 hover:text-indigo-500">{"Login Here"}</Link<Route>>
+			  {"Уже есть аккаунт?"} {" "}
+			<Link<Route> to={Route::LoginPage} classes="text-indigo-400 hover:text-indigo-500">{"Войти"}</Link<Route>>
 			</span>
 			<LoadingButton
 			  loading={store.page_loading}
 			>
-			 {" Sign Up"}
+			 {"Зарегестрироваться"}
 			</LoadingButton>
 		  </form>
 	  </div>
