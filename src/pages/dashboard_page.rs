@@ -1,15 +1,43 @@
-use crate::components::{Header, Section};
-use crate::router::Route;
+use crate::{
+	api::api_user_info,
+	components::{Header,Section},
+	router,
+	store::{set_auth_user, set_page_loading, set_show_alert, Store},
+};
 use yew::prelude::*;
-use yew_router::prelude::*;
-
-use crate::store::Store;
+use yew_router::prelude::use_navigator;
 use yewdux::prelude::*;
+use crate::router::Route;
+use yew_router::prelude::Link;
 
-#[function_component(HomePage)]
-pub fn home_page() -> Html {
+#[function_component(DashboardPage)]
+pub fn dashboard_page() -> Html {
 	let (store, dispatch) = use_store::<Store>();
 	let user = store.auth_user.clone();
+	let navigator = use_navigator().unwrap();
+
+	use_effect_with_deps(
+		move |_| {
+			let dispatch = dispatch.clone();
+			wasm_bindgen_futures::spawn_local(async move {
+				set_page_loading(true, dispatch.clone());
+				let response = api_user_info().await;
+				match response {
+					Ok(user) => {
+						set_page_loading(false, dispatch.clone());
+						set_auth_user(Some(user), dispatch);
+					}
+					Err(e) => {
+						set_page_loading(false, dispatch.clone());
+						set_show_alert(e.to_string(), dispatch);
+						navigator.push(&router::Route::LoginPage);
+					}
+				}
+			});
+		},
+		(),
+	);
+
 	html! {
 	  <>
 		<Header />
@@ -21,7 +49,7 @@ pub fn home_page() -> Html {
 				</div>
 			  </div>
 			  <div class="text-center">
-				<h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{"Данные для масштабирования вашего онлайн-бизнеса"}</h1>
+				<h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{"Dashboard"}</h1>
 				<p class="mt-6 text-lg leading-8 text-gray-300">{"Для тех, кто хочет воспользоваться преимуществами новейших возможностей искуственного интеллекта."}</p>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
 					<Link<Route> to={if user.is_some() { Route::ProfilePage } else {Route::LoginPage}} classes="rounded-md bg-indigo-600 hover:bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{"Начать"}</Link<Route>>

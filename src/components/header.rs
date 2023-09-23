@@ -1,5 +1,5 @@
 use crate::{
-	api::user_api::api_logout_user,
+	api::api_logout_user,
 	router::{self, Route},
 	store::{set_auth_user, set_page_loading, set_show_alert, Store},
 };

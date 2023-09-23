@@ -2,8 +2,8 @@ use std::cell::RefCell;
 use std::ops::Deref;
 use std::rc::Rc;
 
-use crate::api::user_api::api_login_user;
-use crate::components::{form_input::FormInput, loading_button::LoadingButton, section::Section};
+use crate::api::api_login_user;
+use crate::components::{FormInput, LoadingButton, Section};
 use crate::router::{self, Route};
 use crate::store::{set_page_loading, set_show_alert, Store};
 
@@ -132,7 +132,7 @@ pub fn login_page() -> Html {
 						match res {
 							Ok(_) => {
 								set_page_loading(false, dispatch);
-								navigator.push(&router::Route::ProfilePage);
+								navigator.push(&router::Route::DashboardPage);
 							}
 							Err(e) => {
 								set_page_loading(false, dispatch.clone());
