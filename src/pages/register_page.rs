@@ -175,7 +175,7 @@ pub fn register_page() -> Html {
 	};
 
 	html! {
-		<Section>
+		<Section p="pl-0">
 		<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 		<h1 class="text-2xl text-center font-[300] text-indigo-400 mb-4">
 		  {"Paradox Agency"}

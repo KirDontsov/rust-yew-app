@@ -1,20 +1,18 @@
 use crate::{
-	components::Header,
-	components::Section,
-	components::Spinner,
-	store::{Store},
+	components::{Section, Sidebar, Spinner},
+	store::Store,
 };
 use yew::prelude::*;
 use yewdux::prelude::*;
 
-#[function_component(ProfilePage)]
-pub fn profile_page() -> Html {
-	let (store, dispatch) = use_store::<Store>();
+#[function_component(AccountPage)]
+pub fn account_page() -> Html {
+	let (store, _) = use_store::<Store>();
 	let user = store.auth_user.clone();
 
 	html! {
 	<>
-	  <Header />
+	  <Sidebar />
 	  <Section>
 			<div class="w-full px-32">
 			  <div class="px-4 sm:px-0">

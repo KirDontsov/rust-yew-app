@@ -54,7 +54,7 @@ pub fn header_component() -> Html {
 			if user.is_some() {
 			   <>
 				<li>
-				  <Link<Route> to={Route::ProfilePage} classes={if location.path() == "/profile" { "text-indigo-400" } else {"text-white"}}>{"Аккаунт"}</Link<Route>>
+				  <Link<Route> to={Route::AccountPage} classes={if location.path() == "/account" { "text-indigo-400" } else {"text-white"}}>{"Аккаунт"}</Link<Route>>
 				</li>
 				<li
 				  class="cursor-pointer text-white"
