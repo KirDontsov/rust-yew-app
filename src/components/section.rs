@@ -8,10 +8,7 @@ pub struct Props {
 
 #[function_component(Section)]
 pub fn section_component(props: &Props) -> Html {
-	let p = props
-			.p
-			.clone()
-			.unwrap_or_else(|| "pl-32".to_string());
+	let p = props.p.clone().unwrap_or_else(|| "pl-[16rem]".to_string());
 
 	html! {
 		<section class={format!("bg-gray-900 min-h-screen overflow-hidden {}", p)}>

@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link data-trunk rel="icon" href="logo.svg" type="image/svg" />
     <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
     <title>Yew App</title>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge add Firefox */
+        .scrollbar-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
 </head>
-<body>
+
+<body class="scrollbar-hidden">
     <div id="root"></div>
 </body>
+
 </html>

@@ -42,7 +42,7 @@ pub fn header_component() -> Html {
 	};
 
 	html! {
-		<header class="h-10 z-10 absolute w-full bg-transparent">
+		<header class="h-20 z-10 absolute w-full bg-transparent">
 		<nav class="h-full flex justify-between container items-center">
 		  <div>
 			<Link<Route> to={Route::HomePage} classes="text-white">{"Paradox"}</Link<Route>>
