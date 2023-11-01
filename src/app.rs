@@ -1,4 +1,4 @@
-use crate::components::{ AlertComponent, AlertProps, Spinner };
+use crate::components::{AlertComponent, AlertProps, Spinner};
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::use_store;

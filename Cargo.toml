@@ -12,6 +12,7 @@ gloo-net = "0.4.0"
 reqwasm = "0.5.0"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.107"
+uuid = "1.5.0"
 validator = { version = "0.16.1", features = ["derive"] }
 wasm-bindgen = "0.2.87"
 wasm-bindgen-futures = "0.4.37"
@@ -19,3 +20,4 @@ web-sys = { version = "0.3.64", features = ["HtmlInputElement", "Window"] }
 yew = { version = "0.20.0", features = ["csr"] }
 yew-router = "0.17.0"
 yewdux = "0.9.3"
+gloo-console = "0.3.0"

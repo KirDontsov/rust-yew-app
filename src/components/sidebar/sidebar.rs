@@ -11,8 +11,7 @@ use yewdux::prelude::*;
 
 #[function_component(Sidebar)]
 pub fn sidebar_component() -> Html {
-	let (store, dispatch) = use_store::<Store>();
-	let user = store.auth_user.clone();
+	let (_, dispatch) = use_store::<Store>();
 	let navigator = use_navigator().unwrap();
 	let location = use_location().unwrap();
 
@@ -24,6 +23,7 @@ pub fn sidebar_component() -> Html {
 			wasm_bindgen_futures::spawn_local(async move {
 				set_page_loading(true, cl_dispatch.clone());
 				let response = api_user_info().await;
+
 				match response {
 					Ok(user) => {
 						set_page_loading(false, cl_dispatch.clone());
@@ -102,6 +102,12 @@ pub fn sidebar_component() -> Html {
 				  <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
 			   </svg>
 			   <span class="flex-1 ml-3 whitespace-nowrap">{"Account"}</span>
+			</SidebarItem>
+			<SidebarItem to={Route::UsersPage} active={location.path() == "/users"}>
+			   <svg class={format!("w-5 h-5 transition duration-75 text-gray-400 {}", if location.path() == "/users" {"text-indigo-400 group-hover:text-indigo-300"} else {"text-gray-400 group-hover:text-white"})} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+				  <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
+			   </svg>
+			   <span class="flex-1 ml-3 whitespace-nowrap">{"Users"}</span>
 			</SidebarItem>
 			<SidebarItem to={Route::ParserPage} active={location.path() == "/parser"}>
 			   <svg class={format!("w-5 h-5 transition duration-75 text-gray-400 {}", if location.path() == "/account" {"text-indigo-400 group-hover:text-indigo-300"} else {"text-gray-400 group-hover:text-white"})} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">

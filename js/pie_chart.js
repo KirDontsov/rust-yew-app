@@ -22,15 +22,6 @@ export class PieChart {
     this.config = {
       type: 'doughnut',
       data: data,
-      // options: {
-      //   responsive: false,
-      //   scales: {
-      //     y: {
-      //       suggestedMin: 0,
-      //       suggestedMax: 50
-      //     }
-      //   }
-      // }
     };
   }
 

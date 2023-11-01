@@ -20,9 +20,20 @@ pub struct UserData {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct UsersData {
+	pub users: Vec<User>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct UserResponse {
 	pub status: String,
 	pub data: UserData,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct UsersResponse {
+	pub status: String,
+	pub data: UsersData,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
