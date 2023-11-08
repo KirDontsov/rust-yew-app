@@ -1,16 +1,9 @@
-use crate::{
-	api::api_logout_user,
-	router::{self, Route},
-	store::{set_auth_user, set_page_loading, set_show_alert, Store},
-};
-use wasm_bindgen_futures::spawn_local;
+use crate::router::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;
-use yewdux::prelude::*;
 
 #[derive(PartialEq, Properties)]
 pub struct Props {
-	// pub item: String,
 	pub active: bool,
 	pub to: Route,
 	pub children: Children,

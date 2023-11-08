@@ -22,6 +22,7 @@ pub struct UserData {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UsersData {
 	pub users: Vec<User>,
+	pub users_count: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
