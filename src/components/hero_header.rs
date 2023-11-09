@@ -8,8 +8,8 @@ use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::*;
 
-#[function_component(Header)]
-pub fn header_component() -> Html {
+#[function_component(HeroHeader)]
+pub fn hero_header_component() -> Html {
 	let (store, dispatch) = use_store::<Store>();
 	let user = store.auth_user.clone();
 	let navigator = use_navigator().unwrap();

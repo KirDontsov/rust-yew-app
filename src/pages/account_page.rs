@@ -1,5 +1,5 @@
 use crate::{
-	components::{Section, Sidebar, Spinner},
+	components::{ContentSection, Header, Section, Sidebar, Spinner},
 	store::Store,
 };
 use yew::prelude::*;
@@ -14,10 +14,9 @@ pub fn account_page() -> Html {
 	<>
 	  <Sidebar />
 	  <Section>
-			<div class="w-full px-32">
+			<Header title="Аккаунт" sub_title="Личная информация." />
+			<ContentSection h="200">
 			  <div class="px-4 sm:px-0">
-				<h3 class="text-base font-semibold leading-7 text-gray-100">{"Аккаунт"}</h3>
-				<p class="mt-1 max-w-2xl text-sm leading-6 text-gray-300">{"Личная информация."}</p>
 			  </div>
 			  if let Some(user) = user {
 					<div class="mt-6 border-t border-gray-100">
@@ -43,7 +42,7 @@ pub fn account_page() -> Html {
 				} else {
 				  <p class="mb-4"><Spinner /></p>
 				}
-			</div>
+			</ContentSection>
 	  </Section>
 	</>
 	}

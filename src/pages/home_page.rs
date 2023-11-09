@@ -1,4 +1,4 @@
-use crate::components::{Header, Section};
+use crate::components::{HeroHeader, Section};
 use crate::router::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -12,7 +12,7 @@ pub fn home_page() -> Html {
 	let user = store.auth_user.clone();
 	html! {
 	  <>
-		<Header />
+		<HeroHeader />
 		<Section p="pl-0">
 			<div class="mx-auto max-w-2xl py-24 sm:py-32 lg:py-48">
 			  <div class="hidden sm:mb-8 sm:flex sm:justify-center">
