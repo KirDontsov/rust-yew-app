@@ -11,7 +11,7 @@ pub fn dashboard_page() -> Html {
 	  <>
 			<Sidebar />
 			<Section>
-			<Header title="Сводка" />
+			<Header title="С возвращением!" />
 			<ContentSection>
 				<h2 class="subtitle text-white">{bindings::get_now_date()}</h2>
 				<div class="flex w-full gap-8 justify-between">

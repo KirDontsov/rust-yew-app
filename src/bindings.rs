@@ -47,3 +47,17 @@ extern "C" {
 	#[wasm_bindgen(method)]
 	pub fn update(this: &RadarChart, value: i32);
 }
+
+#[wasm_bindgen(module = "/js/maps.js")]
+extern "C" {
+	pub type Maps;
+
+	#[wasm_bindgen(constructor)]
+	pub fn new() -> Maps;
+
+	#[wasm_bindgen(method)]
+	pub fn draw(this: &Maps, element_id: &str);
+
+	#[wasm_bindgen(method)]
+	pub fn update(this: &Maps, value: i32);
+}
