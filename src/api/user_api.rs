@@ -47,6 +47,8 @@ pub async fn api_get_users(page: i32, limit: i32) -> Result<UsersData, String> {
 		let error_response = response.json::<ErrorResponse>().await;
 		return if let Ok(error_response) = error_response {
 			Err(error_response.message)
+		} else if response.status() == 403 {
+			Err(format!("Доступ запрещен {}", response.status()))
 		} else {
 			Err(format!("Ошибка API: {}", response.status()))
 		};
