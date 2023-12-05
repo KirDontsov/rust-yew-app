@@ -2,6 +2,7 @@ use crate::{
 	api::api_get_users,
 	components::{ContentSection, Header, Pagination, Section, Sidebar, Spinner},
 	store::{set_page_loading, set_show_alert, Store},
+	widgets::UsersCurtain,
 };
 use std::primitive::*;
 use yew::prelude::*;
@@ -11,6 +12,12 @@ use yewdux::prelude::*;
 pub fn users_page() -> Html {
 	let users = use_state(|| Vec::new());
 	let cl_users = users.clone();
+
+	let selected_user = use_state(|| None);
+	let cl_selected_user = selected_user.clone();
+
+	let open = use_state(|| false);
+	let cl_open = open.clone();
 
 	let users_count = use_state(|| 0 as i32);
 	let cl_users_count = users_count.clone();
@@ -48,8 +55,19 @@ pub fn users_page() -> Html {
 		.iter()
 		.enumerate()
 		.map(|(index, user)| {
+
+				let handle_select = {
+					let cl_user = user.clone();
+					let cl_selected_user = selected_user.clone();
+					let clo_open = open.clone();
+					Callback::from(move |_| {
+						cl_selected_user.set(Some(cl_user.clone()));
+						clo_open.set(true);
+					})
+				};
+
 			html! {
-				  <tr key={user.id.clone()} class={format!("bg-white border-b dark:border-gray-700 {}", if index % 2 != 0 {"dark:bg-gray-800"} else {"dark:bg-gray-900"})}>
+				  <tr key={user.id.clone()} onclick={handle_select.clone()} class={format!("bg-white border-b dark:border-gray-700 {}", if index % 2 != 0 {"dark:bg-gray-800"} else {"dark:bg-gray-900"})}>
 					<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 					  { user.name.clone() }
 					</th>
@@ -107,6 +125,7 @@ pub fn users_page() -> Html {
 						</table>
 
 						<Pagination page={page} users_count={*clonned_users_count.clone()} />
+						<UsersCurtain open={cl_open.clone()} selected_user={cl_selected_user.clone()} />
 					</div>
 
 			}

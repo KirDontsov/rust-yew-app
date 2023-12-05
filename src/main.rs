@@ -7,6 +7,7 @@ mod components;
 mod pages;
 mod router;
 mod store;
+mod widgets;
 
 fn main() {
 	yew::Renderer::<App>::new().render();

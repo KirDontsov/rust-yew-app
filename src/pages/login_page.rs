@@ -32,16 +32,16 @@ struct LoginUserSchema {
 
 fn get_input_callback(
 	name: &'static str,
-	cloned_form: UseStateHandle<LoginUserSchema>,
+	cl_form: UseStateHandle<LoginUserSchema>,
 ) -> Callback<String> {
 	Callback::from(move |value| {
-		let mut data = cloned_form.deref().clone();
+		let mut data = cl_form.deref().clone();
 		match name {
 			"email" => data.email = value,
 			"password" => data.password = value,
 			_ => (),
 		}
-		cloned_form.set(data);
+		cl_form.set(data);
 	})
 }
 
@@ -56,32 +56,32 @@ pub fn login_page() -> Html {
 	let password_input_ref = NodeRef::default();
 
 	let validate_input_on_blur = {
-		let cloned_form = form.clone();
-		let cloned_validation_errors = validation_errors.clone();
+		let cl_form = form.clone();
+		let cl_validation_errors = validation_errors.clone();
 		Callback::from(move |(name, value): (String, String)| {
-			let mut data = cloned_form.deref().clone();
+			let mut data = cl_form.deref().clone();
 			match name.as_str() {
 				"email" => data.email = value,
 				"password" => data.password = value,
 				_ => (),
 			}
-			cloned_form.set(data);
+			cl_form.set(data);
 
-			match cloned_form.validate() {
+			match cl_form.validate() {
 				Ok(_) => {
-					cloned_validation_errors
+					cl_validation_errors
 						.borrow_mut()
 						.errors_mut()
 						.remove(name.as_str());
 				}
 				Err(errors) => {
-					cloned_validation_errors
+					cl_validation_errors
 						.borrow_mut()
 						.errors_mut()
 						.retain(|key, _| key != &name);
 					for (field_name, error) in errors.errors() {
 						if field_name == &name {
-							cloned_validation_errors
+							cl_validation_errors
 								.borrow_mut()
 								.errors_mut()
 								.insert(field_name, error.clone());
@@ -96,24 +96,24 @@ pub fn login_page() -> Html {
 	let handle_password_input = get_input_callback("password", form.clone());
 
 	let on_submit = {
-		let cloned_form = form.clone();
-		let cloned_validation_errors = validation_errors.clone();
+		let cl_form = form.clone();
+		let cl_validation_errors = validation_errors.clone();
 		let store_dispatch = dispatch.clone();
-		let cloned_navigator = navigator.clone();
+		let cl_navigator = navigator.clone();
 
-		let cloned_email_input_ref = email_input_ref.clone();
-		let cloned_password_input_ref = password_input_ref.clone();
+		let cl_email_input_ref = email_input_ref.clone();
+		let cl_password_input_ref = password_input_ref.clone();
 
 		Callback::from(move |event: SubmitEvent| {
 			event.prevent_default();
 
 			let dispatch = store_dispatch.clone();
-			let form = cloned_form.clone();
-			let validation_errors = cloned_validation_errors.clone();
-			let navigator = cloned_navigator.clone();
+			let form = cl_form.clone();
+			let validation_errors = cl_validation_errors.clone();
+			let navigator = cl_navigator.clone();
 
-			let email_input_ref = cloned_email_input_ref.clone();
-			let password_input_ref = cloned_password_input_ref.clone();
+			let email_input_ref = cl_email_input_ref.clone();
+			let password_input_ref = cl_password_input_ref.clone();
 
 			spawn_local(async move {
 				match form.validate() {

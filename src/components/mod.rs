@@ -1,6 +1,7 @@
 pub mod alert;
 pub mod charts;
 pub mod content_section;
+pub mod curtain;
 pub mod form_input;
 pub mod header;
 pub mod hero_header;
@@ -14,6 +15,7 @@ pub mod spinner;
 pub use self::alert::{AlertComponent, Props as AlertProps};
 pub use self::charts::{LineChartComponent, PieChartComponent, RadarChartComponent};
 pub use self::content_section::ContentSection;
+pub use self::curtain::Curtain;
 pub use self::form_input::FormInput;
 pub use self::header::Header;
 pub use self::hero_header::HeroHeader;

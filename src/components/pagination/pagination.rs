@@ -7,7 +7,6 @@ fn conv(x: i32) -> f32 {
 }
 
 pub fn generate_array(n: i32) -> Vec<i32> {
-	dbg!(n);
 	(1..=n + 1).collect()
 }
 
