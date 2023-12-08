@@ -1,5 +1,6 @@
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
+use validator::Validate;
 
 #[allow(non_snake_case)]
 #[derive(Debug, Serialize, Deserialize, Default, PartialEq, Clone)]
@@ -47,4 +48,14 @@ pub struct UserLoginResponse {
 pub struct ErrorResponse {
 	pub status: String,
 	pub message: String,
+}
+
+#[derive(Validate, Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
+pub struct UpdateUserSchema {
+	pub name: String,
+	pub email: String,
+	pub role: String,
+	pub verified: bool,
+	// #[serde(rename = "updatedAt")]
+	// pub updated_at: String,
 }

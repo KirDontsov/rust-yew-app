@@ -1,10 +1,9 @@
 use crate::{
-	api::api_get_users,
+	api::{api_get_users, User},
 	components::{ContentSection, Header, Pagination, Section, Sidebar, Spinner},
 	store::{set_page_loading, set_show_alert, Store},
 	widgets::UsersCurtain,
 };
-use std::primitive::*;
 use yew::prelude::*;
 use yewdux::prelude::*;
 
@@ -12,15 +11,19 @@ use yewdux::prelude::*;
 pub fn users_page() -> Html {
 	let users = use_state(|| Vec::new());
 	let cl_users = users.clone();
+	let cl_cl_users = users.clone();
 
-	let selected_user = use_state(|| None);
+	let need_refetch = use_state(|| false);
+
+	let selected_user = use_state(|| User::default());
 	let cl_selected_user = selected_user.clone();
 
 	let open = use_state(|| false);
 	let cl_open = open.clone();
 
-	let users_count = use_state(|| 0 as i32);
+	let users_count = use_state(|| 0);
 	let cl_users_count = users_count.clone();
+	let cl_cl_users_count = users_count.clone();
 	let clonned_users_count = users_count.clone();
 
 	let page = use_state(|| 1);
@@ -28,7 +31,9 @@ pub fn users_page() -> Html {
 
 	let (_, dispatch) = use_store::<Store>();
 	let cl_dispatch = dispatch.clone();
+	let cl_cl_dispatch = dispatch.clone();
 
+	// фетч при инициализации и изменении пагинации
 	use_effect_with_deps(
 		move |_| {
 			wasm_bindgen_futures::spawn_local(async move {
@@ -51,6 +56,37 @@ pub fn users_page() -> Html {
 		page.clone(),
 	);
 
+	// рефетч после редактирования пользователя в шторке
+	use_effect_with_deps(
+		move |(cl_page, cl_need_refetch)| {
+			let need_refetch = cl_need_refetch.clone();
+			let page = cl_page.clone();
+			wasm_bindgen_futures::spawn_local(async move {
+				set_page_loading(true, cl_cl_dispatch.clone());
+
+				if *need_refetch {
+					let response = api_get_users(*page, 10).await;
+					match response {
+						Ok(users_data) => {
+							set_page_loading(false, cl_cl_dispatch.clone());
+							need_refetch.set(false);
+							cl_cl_users.set(users_data.users);
+							cl_cl_users_count.set(users_data.users_count);
+						}
+						Err(e) => {
+							need_refetch.set(false);
+							set_page_loading(false, cl_cl_dispatch.clone());
+							set_show_alert(e.to_string(), cl_cl_dispatch);
+						}
+					}
+				} else {
+					set_page_loading(false, cl_cl_dispatch.clone());
+				}
+			});
+		},
+		(page.clone(), need_refetch.clone()),
+	);
+
 	let users_list = users
 		.iter()
 		.enumerate()
@@ -61,7 +97,7 @@ pub fn users_page() -> Html {
 					let cl_selected_user = selected_user.clone();
 					let clo_open = open.clone();
 					Callback::from(move |_| {
-						cl_selected_user.set(Some(cl_user.clone()));
+						cl_selected_user.set(cl_user.clone());
 						clo_open.set(true);
 					})
 				};
@@ -125,7 +161,7 @@ pub fn users_page() -> Html {
 						</table>
 
 						<Pagination page={page} users_count={*clonned_users_count.clone()} />
-						<UsersCurtain open={cl_open.clone()} selected_user={cl_selected_user.clone()} />
+						<UsersCurtain open={cl_open.clone()} selected_user={cl_selected_user.clone()} need_refetch={need_refetch.clone()} />
 					</div>
 
 			}
