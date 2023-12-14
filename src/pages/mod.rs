@@ -5,6 +5,7 @@ pub mod login_page;
 pub mod maps_page;
 pub mod not_found;
 pub mod parser_page;
+pub mod quotes_page;
 pub mod register_page;
 pub mod users_page;
 
@@ -15,5 +16,6 @@ pub use self::login_page::LoginPage;
 pub use self::maps_page::MapsPage;
 pub use self::not_found::NotFoundPage;
 pub use self::parser_page::ParserPage;
+pub use self::quotes_page::QuotesPage;
 pub use self::register_page::RegisterPage;
 pub use self::users_page::UsersPage;

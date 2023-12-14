@@ -3,7 +3,7 @@ use yew_router::prelude::*;
 
 use crate::pages::{
 	AccountPage, DashboardPage, HomePage, LoginPage, MapsPage, NotFoundPage, ParserPage,
-	RegisterPage, UsersPage,
+	QuotesPage, RegisterPage, UsersPage,
 };
 
 #[derive(Clone, Routable, PartialEq)]
@@ -22,6 +22,8 @@ pub enum Route {
 	ParserPage,
 	#[at("/users")]
 	UsersPage,
+	#[at("/quotes")]
+	QuotesPage,
 	#[at("/maps")]
 	MapsPage,
 	#[not_found]
@@ -38,6 +40,7 @@ pub fn switch(routes: Route) -> Html {
 		Route::DashboardPage => html! {<DashboardPage/> },
 		Route::ParserPage => html! {<ParserPage/> },
 		Route::UsersPage => html! {<UsersPage/> },
+		Route::QuotesPage => html! {<QuotesPage/> },
 		Route::MapsPage => html! { <MapsPage /> },
 		Route::NotFound => html! { <NotFoundPage /> },
 	}

@@ -12,19 +12,19 @@ pub fn generate_array(n: i32) -> Vec<i32> {
 
 #[derive(PartialEq, Properties)]
 pub struct Props {
-	pub users_count: i32,
+	pub count: i32,
 	pub page: UseStateHandle<i32>,
 }
 
 #[function_component(Pagination)]
 pub fn pagination_component(props: &Props) -> Html {
-	let cl_users_count = props.users_count.clone();
+	let cl_count = props.count.clone();
 	let cl_page = &props.page;
 
 	let onclick_next = {
 		let page = cl_page.clone();
 		Callback::from(move |_| {
-			let number_of_pages = conv(cl_users_count.clone()) / 10.0;
+			let number_of_pages = conv(cl_count.clone()) / 10.0;
 			if *page < number_of_pages as i32 + 1 {
 				page.set(*page + 1)
 			}
@@ -55,7 +55,7 @@ pub fn pagination_component(props: &Props) -> Html {
 						  </a>
 					  </li>
 
-					   { generate_array((conv(cl_users_count.clone()) / 10.0) as i32).iter().map(|item| {
+					   { generate_array((conv(cl_count.clone()) / 10.0) as i32).iter().map(|item| {
 							  html! { <PaginationItem key={*item} item={*item} page={cl_page.clone()} /> }
 						  }).collect::<Html>() }
 

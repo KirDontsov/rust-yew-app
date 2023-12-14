@@ -59,3 +59,36 @@ pub struct UpdateUserSchema {
 	// #[serde(rename = "updatedAt")]
 	// pub updated_at: String,
 }
+
+#[allow(non_snake_case)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq, Clone)]
+pub struct Quote {
+	pub id: String,
+	pub text: String,
+	pub author: String,
+	pub createdAt: DateTime<Utc>,
+	pub updatedAt: DateTime<Utc>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct QuoteData {
+	pub quote: Quote,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct QuotesData {
+	pub quotes: Vec<Quote>,
+	pub quotes_count: i32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct QuoteResponse {
+	pub status: String,
+	pub data: QuoteData,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct QuotesResponse {
+	pub status: String,
+	pub data: QuotesData,
+}

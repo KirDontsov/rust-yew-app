@@ -160,7 +160,7 @@ pub fn users_page() -> Html {
 							</tbody>
 						</table>
 
-						<Pagination page={page} users_count={*clonned_users_count.clone()} />
+						<Pagination page={page} count={*clonned_users_count.clone()} />
 						<UsersCurtain open={cl_open.clone()} selected_user={cl_selected_user.clone()} need_refetch={need_refetch.clone()} />
 					</div>
 
