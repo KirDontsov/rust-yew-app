@@ -6,7 +6,7 @@ use crate::api::api_update_user_by_id;
 use crate::store::{set_page_loading, set_show_alert, Store};
 use crate::{
 	api::{UpdateUserSchema, User},
-	components::{Curtain, FormInput, LoadingButton, Section},
+	components::{Curtain, FormInput, LoadingButton},
 };
 use uuid::Uuid;
 use validator::{Validate, ValidationErrors};
@@ -151,6 +151,7 @@ pub fn users_curtain_component(props: &Props) -> Html {
 		let cl_need_refetch = need_refetch.clone();
 		let cl_validation_errors = validation_errors.clone();
 		let cl_dispatch = dispatch.clone();
+		let cl_open = open.clone();
 
 		let cl_name_input_ref = name_input_ref.clone();
 		let cl_email_input_ref = email_input_ref.clone();
@@ -163,6 +164,7 @@ pub fn users_curtain_component(props: &Props) -> Html {
 			let validation_errors = cl_validation_errors.clone();
 			let dispatch = cl_dispatch.clone();
 			let cl_selected_user = selected_user.clone();
+			let open = cl_open.clone();
 
 			let name_input_ref = cl_name_input_ref.clone();
 			let email_input_ref = cl_email_input_ref.clone();
@@ -201,11 +203,13 @@ pub fn users_curtain_component(props: &Props) -> Html {
 									"Пользователь успешно отредактирован".to_string(),
 									dispatch,
 								);
+								open.set(false);
 							}
 							Err(e) => {
 								need_refetch.set(true);
 								set_page_loading(false, dispatch.clone());
 								set_show_alert(e.to_string(), dispatch);
+								open.set(false);
 							}
 						};
 					}

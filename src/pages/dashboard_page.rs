@@ -1,7 +1,7 @@
 use crate::bindings;
 use crate::components::{
-	ContentSection, Header, LineChartComponent, PieChartComponent, RadarChartComponent, Section,
-	Sidebar,
+	CalendarComponent, ContentSection, Header, LineChartComponent, PieChartComponent,
+	RadarChartComponent, Section, Sidebar,
 };
 use yew::prelude::*;
 
@@ -19,6 +19,7 @@ pub fn dashboard_page() -> Html {
 					<div><PieChartComponent id="chart-2" /></div>
 					<div><RadarChartComponent id="chart-3" /></div>
 				</div>
+				<CalendarComponent />
 			</ContentSection>
 			</Section>
 	  </>

@@ -3,7 +3,7 @@ export class Maps {
   constructor() {
     this.config = {
         location: {
-          center: [37.588144, 55.733842],
+          center: [30.314997, 59.938784],
           zoom: 10
         }
       };

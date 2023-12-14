@@ -1,4 +1,5 @@
 pub mod alert;
+pub mod calendar;
 pub mod charts;
 pub mod content_section;
 pub mod curtain;
@@ -13,6 +14,7 @@ pub mod sidebar;
 pub mod spinner;
 
 pub use self::alert::{AlertComponent, Props as AlertProps};
+pub use self::calendar::CalendarComponent;
 pub use self::charts::{LineChartComponent, PieChartComponent, RadarChartComponent};
 pub use self::content_section::ContentSection;
 pub use self::curtain::Curtain;
