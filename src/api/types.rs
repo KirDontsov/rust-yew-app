@@ -56,8 +56,6 @@ pub struct UpdateUserSchema {
 	pub email: String,
 	pub role: String,
 	pub verified: bool,
-	// #[serde(rename = "updatedAt")]
-	// pub updated_at: String,
 }
 
 #[allow(non_snake_case)]
@@ -91,4 +89,10 @@ pub struct QuoteResponse {
 pub struct QuotesResponse {
 	pub status: String,
 	pub data: QuotesData,
+}
+
+#[derive(Validate, Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
+pub struct AddQuoteSchema {
+	pub author: String,
+	pub text: String,
 }

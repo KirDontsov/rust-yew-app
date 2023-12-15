@@ -58,3 +58,30 @@ pub async fn api_get_quotes(page: i32, limit: i32) -> Result<QuotesData, String>
 		Err(_) => Err("Не удалось прочитать ответ".to_string()),
 	}
 }
+
+pub async fn api_add_quote(quote_data: &str) -> Result<Quote, String> {
+	let response = match http::Request::post("http://localhost:8000/api/quote")
+		.header("Content-Type", "application/json")
+		.body(quote_data)
+		.send()
+		.await
+	{
+		Ok(res) => res,
+		Err(_) => return Err("Не удалось сделать запрос".to_string()),
+	};
+
+	if response.status() != 200 {
+		let error_response = response.json::<ErrorResponse>().await;
+		return if let Ok(error_response) = error_response {
+			Err(error_response.message)
+		} else {
+			Err(format!("Ошибка API: {}", response.status()))
+		};
+	}
+
+	let res_json = response.json::<QuoteResponse>().await;
+	match res_json {
+		Ok(data) => Ok(data.data.quote),
+		Err(_) => Err("Не удалось прочитать ответ".to_string()),
+	}
+}

@@ -2,6 +2,7 @@ use crate::{
 	api::{api_get_quotes, Quote},
 	components::{ContentSection, Header, Pagination, Section, Sidebar, Spinner},
 	store::{set_page_loading, set_show_alert, Store},
+	widgets::QuotesCurtain,
 };
 use yew::prelude::*;
 use yewdux::prelude::*;
@@ -10,7 +11,6 @@ use yewdux::prelude::*;
 pub fn quotes_page() -> Html {
 	let quotes = use_state(|| Vec::new());
 	let cl_quotes = quotes.clone();
-	let cl_cl_quotes = quotes.clone();
 
 	let need_refetch = use_state(|| false);
 
@@ -53,6 +53,13 @@ pub fn quotes_page() -> Html {
 		page.clone(),
 	);
 
+	let handle_add = {
+		let cl_open = open.clone();
+		Callback::from(move |_| {
+			cl_open.set(true);
+		})
+	};
+
 	let quotes_list = quotes
 		.iter()
 		.enumerate()
@@ -93,6 +100,13 @@ pub fn quotes_page() -> Html {
 	<Section>
 	<Header title="Список цитат" />
 	<ContentSection>
+	  <div>
+	  <button onclick={handle_add.clone()} type="button" class="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+	  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+	  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+	  </svg>
+	  </button>
+		</div>
 		{ if quotes.len() > 0  {
 			html!{
 
@@ -121,6 +135,7 @@ pub fn quotes_page() -> Html {
 						</table>
 
 						<Pagination page={page} count={*clonned_quotes_count.clone()} />
+					<QuotesCurtain open={cl_open.clone()} selected_quote={cl_selected_quote.clone()} need_refetch={need_refetch.clone()} />
 					</div>
 
 			}
