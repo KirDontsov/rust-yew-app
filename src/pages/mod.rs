@@ -1,21 +1,23 @@
 pub mod account_page;
 pub mod dashboard_page;
+pub mod firms_info_page;
+pub mod firms_page;
 pub mod home_page;
 pub mod login_page;
 pub mod maps_page;
 pub mod not_found;
-pub mod parser_page;
 pub mod quotes_page;
 pub mod register_page;
 pub mod users_page;
 
 pub use self::account_page::AccountPage;
 pub use self::dashboard_page::DashboardPage;
+pub use self::firms_info_page::FirmsInfoPage;
+pub use self::firms_page::FirmsPage;
 pub use self::home_page::HomePage;
 pub use self::login_page::LoginPage;
 pub use self::maps_page::MapsPage;
 pub use self::not_found::NotFoundPage;
-pub use self::parser_page::ParserPage;
 pub use self::quotes_page::QuotesPage;
 pub use self::register_page::RegisterPage;
 pub use self::users_page::UsersPage;
