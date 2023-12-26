@@ -6,8 +6,8 @@ use crate::{
 use yew::prelude::*;
 use yewdux::prelude::*;
 
-#[function_component(ParserPage)]
-pub fn pasrser_page() -> Html {
+#[function_component(FirmsPage)]
+pub fn firms_page() -> Html {
 	let (_, dispatch) = use_store::<Store>();
 	let cl_dispatch = dispatch.clone();
 
@@ -35,7 +35,7 @@ pub fn pasrser_page() -> Html {
 			<Sidebar />
 			<Section>
 				<div class="text-center">
-					<h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{"Parser"}</h1>
+					<h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{"Firms"}</h1>
 					<p class="mt-6 text-lg leading-8 text-gray-300">{"Для тех, кто хочет воспользоваться преимуществами новейших возможностей искуственного интеллекта."}</p>
 			  </div>
 			</Section>
