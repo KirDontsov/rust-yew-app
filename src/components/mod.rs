@@ -22,7 +22,7 @@ pub use self::form_input::FormInput;
 pub use self::header::Header;
 pub use self::hero_header::HeroHeader;
 pub use self::loading_button::LoadingButton;
-pub use self::maps::MapsComponent;
+pub use self::maps::*;
 pub use self::pagination::Pagination;
 pub use self::section::Section;
 pub use self::sidebar::Sidebar;

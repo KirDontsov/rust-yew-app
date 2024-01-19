@@ -2,8 +2,8 @@ use yew::prelude::*;
 use yew_router::prelude::*;
 
 use crate::pages::{
-	AccountPage, DashboardPage, FirmsInfoPage, FirmsPage, HomePage, LoginPage, MapsPage,
-	NotFoundPage, QuotesPage, RegisterPage, UsersPage,
+	AccountPage, DashboardPage, FirmsInfoPage, FirmsPage, FirmsReviewsPage, HomePage, LoginPage,
+	MapsPage, NotFoundPage, QuotesPage, RegisterPage, UsersPage,
 };
 
 #[derive(Clone, Routable, PartialEq)]
@@ -24,10 +24,12 @@ pub enum Route {
 	QuotesPage,
 	#[at("/maps")]
 	MapsPage,
-	#[at("/firms")]
+	#[at("/crawler/firms")]
 	FirmsPage,
-	#[at("/firms_info")]
+	#[at("/crawler/firms_info")]
 	FirmsInfoPage,
+	#[at("/crawler/firms_reviews")]
+	FirmsReviewsPage,
 	#[not_found]
 	#[at("/404")]
 	NotFound,
@@ -45,6 +47,7 @@ pub fn switch(routes: Route) -> Html {
 		Route::MapsPage => html! { <MapsPage /> },
 		Route::FirmsPage => html! {<FirmsPage/> },
 		Route::FirmsInfoPage => html! { <FirmsInfoPage /> },
+		Route::FirmsReviewsPage => html! { <FirmsReviewsPage /> },
 		Route::NotFound => html! { <NotFoundPage /> },
 	}
 }
